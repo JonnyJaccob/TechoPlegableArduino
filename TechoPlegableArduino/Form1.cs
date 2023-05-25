@@ -33,7 +33,10 @@ namespace TechoPlegableArduino
 		private int limMin = 20;
 		bool IsPrueba = false;
 		static string rutaBase = Application.StartupPath;
-		//private static string imagenNormal = Path.Combine(rutaBase, "SemaforoApag1_2.png");
+		private static string imagenFrio1 = Path.Combine(rutaBase, "frio.png");
+		private static string imagenFrio2 = Path.Combine(rutaBase, "png-transparent.png");
+		private static string imagenCalor1 = Path.Combine(rutaBase, "descarga_calor.png");
+		private static string imagenCalor2 = Path.Combine(rutaBase, "sol.jpg");
 
 		SerialPort serialPort1;
 		private void Form1_Load(object sender, EventArgs e)
@@ -135,23 +138,49 @@ namespace TechoPlegableArduino
 			// y luego actualizar el valor en el Label utilizando el método ActualizarValor
 			ActualizarValor(data);
 
-			if(temperatura <= limite)
-			{
-				
-			}
-			else
-			{
-				// Mostrar la animación de calor
-				MostrarAnimacionCalor();
-			}
+			IniciarAnimacion();
 		}
+		int calor = 1;
+		int frio = 1;
 		private void MostrarAnimacionCalor()
 		{
 			// Mostrar el PictureBox
 			pictureBoxCalor.Invoke(new Action(() => pictureBoxCalor.Visible = true));
-			
+			pictureBoxCalor.Invoke(new Action(() => pictureBoxCalor.BackColor = Color.Red));
+			picImagen.Invoke(new Action(() => picImagen.Visible = true));
+			Bitmap Tcalor; 
+			if (calor==1)
+			{
+				calor = 0;
+				Tcalor = new Bitmap(imagenCalor1);
+			}
+			else
+			{
+				calor = 1;
+				Tcalor = new Bitmap(imagenCalor2);
+			}
+			picImagen.Invoke(new Action(() => picImagen.Image = Tcalor));
 		}
-		
+		private void MostrarAnimacionFrio()
+		{
+			// Mostrar el PictureBox
+			pictureBoxCalor.Invoke(new Action(() => pictureBoxCalor.Visible = true));
+			pictureBoxCalor.Invoke(new Action(() => pictureBoxCalor.BackColor = Color.Cyan));
+			picImagen.Invoke(new Action(() => picImagen.Visible = true));
+			Bitmap Tfrio;
+			if (frio == 1)
+			{
+				frio = 0;
+				Tfrio = new Bitmap(imagenFrio1);
+			}
+			else
+			{
+				frio = 1;
+				Tfrio = new Bitmap(imagenFrio2);
+			}
+			picImagen.Invoke(new Action(() => picImagen.Image = Tfrio));
+		}
+
 		private void ActualizarValor(string valor)
 		{
 			// Actualiza el valor en la interfaz de usuario
@@ -258,15 +287,24 @@ namespace TechoPlegableArduino
 				temperatura = numero;
 				ActualizarValor(temperatura);
 				IsPrueba = true;
-				if (temperatura <= limite)
-				{
-					
-				}
-				else
-				{
-					// Mostrar la animación de calor
-					MostrarAnimacionCalor();
-				}
+				IniciarAnimacion();
+			}
+		}
+		private void IniciarAnimacion()
+		{
+			if (temperatura <= limMin)//Demasiado frio
+			{
+				MostrarAnimacionFrio();
+			}
+			else if (temperatura >= limite) //Demasiado caliente
+			{
+				// Mostrar la animación de calor
+				MostrarAnimacionCalor();
+			}
+			else // normal
+			{
+				pictureBoxCalor.Invoke(new Action(() => pictureBoxCalor.Visible = false));
+				picImagen.Invoke(new Action(() => picImagen.Visible = false));
 			}
 		}
 

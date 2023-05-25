@@ -41,13 +41,15 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.pictureBoxCalor = new System.Windows.Forms.PictureBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.txtTemperatura = new System.Windows.Forms.TextBox();
-			this.btnSimular = new System.Windows.Forms.Button();
 			this.btnReiniciar = new System.Windows.Forms.Button();
+			this.btnSimular = new System.Windows.Forms.Button();
+			this.txtTemperatura = new System.Windows.Forms.TextBox();
+			this.picImagen = new System.Windows.Forms.PictureBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCalor)).BeginInit();
 			this.groupBox3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.picImagen)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -106,6 +108,7 @@
 			// lblTemperatura
 			// 
 			this.lblTemperatura.AutoSize = true;
+			this.lblTemperatura.BackColor = System.Drawing.Color.Transparent;
 			this.lblTemperatura.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F);
 			this.lblTemperatura.Location = new System.Drawing.Point(450, 72);
 			this.lblTemperatura.Name = "lblTemperatura";
@@ -184,12 +187,15 @@
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Simular";
 			// 
-			// txtTemperatura
+			// btnReiniciar
 			// 
-			this.txtTemperatura.Location = new System.Drawing.Point(41, 13);
-			this.txtTemperatura.Name = "txtTemperatura";
-			this.txtTemperatura.Size = new System.Drawing.Size(100, 20);
-			this.txtTemperatura.TabIndex = 0;
+			this.btnReiniciar.Location = new System.Drawing.Point(104, 36);
+			this.btnReiniciar.Name = "btnReiniciar";
+			this.btnReiniciar.Size = new System.Drawing.Size(75, 23);
+			this.btnReiniciar.TabIndex = 2;
+			this.btnReiniciar.Text = "Reiniciar";
+			this.btnReiniciar.UseVisualStyleBackColor = true;
+			this.btnReiniciar.Click += new System.EventHandler(this.btnReiniciar_Click);
 			// 
 			// btnSimular
 			// 
@@ -201,15 +207,23 @@
 			this.btnSimular.UseVisualStyleBackColor = true;
 			this.btnSimular.Click += new System.EventHandler(this.btnSimular_Click);
 			// 
-			// btnReiniciar
+			// txtTemperatura
 			// 
-			this.btnReiniciar.Location = new System.Drawing.Point(104, 36);
-			this.btnReiniciar.Name = "btnReiniciar";
-			this.btnReiniciar.Size = new System.Drawing.Size(75, 23);
-			this.btnReiniciar.TabIndex = 2;
-			this.btnReiniciar.Text = "Reiniciar";
-			this.btnReiniciar.UseVisualStyleBackColor = true;
-			this.btnReiniciar.Click += new System.EventHandler(this.btnReiniciar_Click);
+			this.txtTemperatura.Location = new System.Drawing.Point(41, 13);
+			this.txtTemperatura.Name = "txtTemperatura";
+			this.txtTemperatura.Size = new System.Drawing.Size(100, 20);
+			this.txtTemperatura.TabIndex = 0;
+			// 
+			// picImagen
+			// 
+			this.picImagen.Image = global::TechoPlegableArduino.Properties.Resources.frio;
+			this.picImagen.Location = new System.Drawing.Point(432, 199);
+			this.picImagen.Name = "picImagen";
+			this.picImagen.Size = new System.Drawing.Size(156, 92);
+			this.picImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.picImagen.TabIndex = 5;
+			this.picImagen.TabStop = false;
+			this.picImagen.Visible = false;
 			// 
 			// Form1
 			// 
@@ -217,6 +231,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ButtonShadow;
 			this.ClientSize = new System.Drawing.Size(800, 315);
+			this.Controls.Add(this.picImagen);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.lblTemperatura);
@@ -231,6 +246,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCalor)).EndInit();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.picImagen)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -254,6 +270,7 @@
 		private System.Windows.Forms.Button btnReiniciar;
 		private System.Windows.Forms.Button btnSimular;
 		private System.Windows.Forms.TextBox txtTemperatura;
+		private System.Windows.Forms.PictureBox picImagen;
 	}
 }
 
