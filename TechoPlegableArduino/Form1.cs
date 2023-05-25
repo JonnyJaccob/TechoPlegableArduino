@@ -275,6 +275,8 @@ namespace TechoPlegableArduino
 			IsPrueba = false;
 			limite = 32;
 			limMin = 20;
+			lblCambiarTiempo.Text = segundos + " segundos.";
+			lblTempReal.Text = limite + " C°";
 		}
 
 		private void pictureBoxCalor_Click(object sender, EventArgs e)
