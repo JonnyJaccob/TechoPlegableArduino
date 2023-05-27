@@ -188,11 +188,12 @@ namespace TechoPlegableArduino
 			lblTemperatura.Invoke(new Action(() => lblTemperatura.Text = valor + " C °"));
 			try
 			{
-				temperatura = int.Parse(valor);
+				double temperaturaDouble = double.Parse(valor);
+				int temperatura = (int)Math.Round(temperaturaDouble);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show("error:" + ex.Message);
+				MessageBox.Show("error: " + ex.Message + " Metodo: ActualizarValor");
 			}
 		}
 
