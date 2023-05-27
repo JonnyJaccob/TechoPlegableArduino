@@ -75,47 +75,54 @@ namespace TechoPlegableArduino
 		Timer timer;
 		private void btnConectar_Click(object sender, EventArgs e)
 		{
-			string puerto = "COM3"; // Puerto COM que deseas utilizar
-
-			if (!IsPrueba)
+			try
 			{
-				if (!serialPort1.IsOpen)
+				string puerto = "COM3"; // Puerto COM que deseas utilizar
+
+				if (!IsPrueba)
 				{
-					string[] puertosDisponibles = SerialPort.GetPortNames();
-					bool puertoExiste = puertosDisponibles.Contains(puerto);
-
-					if (puertoExiste)
+					if (!serialPort1.IsOpen)
 					{
-						// El puerto COM existe, puedes proceder con la conexión
-						serialPort1.PortName = puerto;
-						serialPort1.BaudRate = 9600;
-						serialPort1.Open();
-						btnConectar.Text = "Desconectar";
+						string[] puertosDisponibles = SerialPort.GetPortNames();
+						bool puertoExiste = puertosDisponibles.Contains(puerto);
 
-						// Inicializar y comenzar el temporizador
-						timer = new Timer();
-						timer.Interval = ConvertSecondsToMilliseconds(segundos); // Convertir segundos a milisegundos
-						timer.Elapsed += Timer_Elapsed;
-						timer.Start();
+						if (puertoExiste)
+						{
+							// El puerto COM existe, puedes proceder con la conexión
+							serialPort1.PortName = puerto;
+							serialPort1.BaudRate = 9600;
+							serialPort1.Open();
+							btnConectar.Text = "Desconectar";
+
+							// Inicializar y comenzar el temporizador
+							timer = new Timer();
+							timer.Interval = ConvertSecondsToMilliseconds(segundos); // Convertir segundos a milisegundos
+							timer.Elapsed += Timer_Elapsed;
+							timer.Start();
+						}
+						else
+						{
+							// El puerto COM no existe, muestra un mensaje de error o realiza alguna acción
+							MessageBox.Show("El puerto " + puerto + " no está disponible");
+						}
 					}
 					else
 					{
-						// El puerto COM no existe, muestra un mensaje de error o realiza alguna acción
-						MessageBox.Show("El puerto " + puerto + " no está disponible");
-					}
-				}
-				else
-				{
-					serialPort1.Close();
-					btnConectar.Text = "Conectar";
+						serialPort1.Close();
+						btnConectar.Text = "Conectar";
 
-					// Detener y eliminar el temporizador
-					if (timer != null)
-					{
-						timer.Stop();
-						timer.Dispose();
+						// Detener y eliminar el temporizador
+						if (timer != null)
+						{
+							timer.Stop();
+							timer.Dispose();
+						}
 					}
 				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("error: " + ex.Message + " Metodo: btnConectar");
 			}
 		}
 
